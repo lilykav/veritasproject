@@ -1,0 +1,51 @@
+###################################################################################################
+########### Veritas Summer Project
+###################################################################################################
+
+/// Initial Email for Project Suggestion
+
+
+ Hi Cormac,
+
+ Sorry for the delay in getting back to you.
+
+ So my original idea for a 10-week project was that you might spend half this time developing
+ your own python software to explore some aspect of the technique for detecting TeV (E>100 GeV) 
+ gamma rays from astrophysical sources. Then the second half would involve using the in-house 
+ VERITAS software to look at some real data recorded with the VERITAS telescope array.
+
+ The project in this format I would now propose would be to explore the way we reject background 
+ noise photons in our photomultiplier cameras. Then using that experience, see if you can improve 
+ our analysis of VERITAS data that we recorded on a gamma-ray burst (GRB 20190114).
+
+ I can't remember what I may have given you already but I'm attaching two papers that you can 
+ take a look at. One describes the field of TeV astrophysics in general, and the other describes VERITAS.
+ You can also get info about VERITAS at https://veritas.sao.arizona.edu/
+
+ Stepping back for a moment, you may not wish to do quite this much work. Also - do your interests 
+ lie more with astrophysics or with computational physics or both? Take a look at the papers and let i
+ me know if you would like to proceed with the project outlined above or if you have any other ideas.
+
+ Regards,
+ Mark
+
+ ps, I got a request from one of your classmates interested just in learning more coding over the i
+ summer and here was my reply:
+
+ You might find some ideas in a book I recommended when you were in 2nd year. There is a free pdf 
+ available at https://www.compadre.org/osp/items/detail.cfm?ID=7375
+
+ The examples are all in C++, but you could easily do them in Python. The early chapters are straight 
+ forward, but there are many nice ideas and challenges in the later chapters. For example last year 
+ one of the fourth years did a project on using the variational principle to solve the Schrodinger equation, 
+ see section 16.7 of the book. Finding the higher energy solutions is an interesting challenge!
+
+ I thought this book 
+ https://www.amazon.com/Python-Scientists-John-M-Stewart-ebook/dp/B072LY85HL
+ looked interesting, my copy is still in College. An eCopy is not too expensive and might be worth getting.
+
+ If you wanted to try something more computer science focused, learn how to write "object-oriented" code 
+ in python. We don't cover this in physics, but it is a very useful structure for very large programming projects. 
+ (we use it in VERITAS). It's described in chapter 12 of "Python programming: an introduction to computer science" 
+ by John Zelle. You should be able to find free pdfs of this book online.
+
