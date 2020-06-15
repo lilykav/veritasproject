@@ -72,7 +72,7 @@ for i in range(len(new)):
     else:
         pix_col='grey'
     plt.plot(x_array[i], y_array[i], 'h', color=pix_col, markersize=8)
-
+    #plt.text(x_array[i], y_array[i], i)   # Adds pixel number to plot
 
 
 
