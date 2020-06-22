@@ -14,9 +14,6 @@ np.set_printoptions(threshold=np.inf)
 
 
 
-# Global Constants
-N_EVENTS = 2500
-TEL_PIXEL_COUNT = 499
 
 
 
@@ -72,6 +69,26 @@ read_tel_details = open("data/PMTS_info.txt", "r")
 pmts_info = read_tel_details.read()
 tel_details = pmts_info.splitlines()
 
+# Global Constants
+N_EVENTS = 2500
+TEL_PIXEL_COUNT = len(tel_details)
+
+
+x_coords = np.zeros(TEL_PIXEL_COUNT)
+y_coords = np.zeros(TEL_PIXEL_COUNT)
+for i in range(TEL_PIXEL_COUNT):
+    # Gets the telescope Details and coordinates for pixels, and plots them according to PixelDetection
+
+    # j = tel_details[i].partition(" ")[2]
+
+    tel_details[i] = tel_details[i].split()
+    tel_details[i][0] = tel_details[i][0] + tel_details[i][1] + "_" + tel_details[i][2]
+    del tel_details[i][1:3]
+    x_coords[i] = tel_details[i][3]
+    y_coords[i] = tel_details[i][4]
+
+#print(tel_details[12])
+
 
 # Reading our Event data
 read_event_details = open("data/gamsims_2500.dat")
@@ -86,9 +103,19 @@ for count, element in enumerate(events):
     events_array[int(element[0]) - 1][int(element[1]) - 1] = int(element[2])
 
 #print(events_array)
+pmt_array = np.transpose(events_array)
 
 
 
+def PulseHeightSpectrum(pmt):
+    for count, element in enumerate(pmt):
+        plt.hist(element, bins=np.arange(30, element.max()+1))
+
+
+
+        plt.savefig('output/pulse_spectrum/output_pulse_spectrumt_{0}.png'.format(count + 1), bbox_inches='tight')
+
+PulseHeightSpectrum(pmt_array)
 
 
 
@@ -96,51 +123,57 @@ def PixelDetection(pix_num):
     if pix_num >= 20:
         return 'blue'
     else:
-        return 'grey'
+        return 'gray'
+
+
+
+
+
+
 
 
 
 
 
 def TelescopePlot(current_event, index):
+    # Generates the Plot of the telescope for a given event.
 
-    x_array = np.zeros(len(tel_details))
-    y_array = np.zeros(len(tel_details))
 
-    for i in range(len(tel_details)):
+
+    pix_color = []
+    for i in range(TEL_PIXEL_COUNT):
         # Gets the telescope Details and coordinates for pixels, and plots them according to PixelDetection
 
-        # j = tel_details[i].partition(" ")[2]
-
-        tel_details[i] = tel_details[i].split()
-        tel_details[i][0] = tel_details[i][0] + tel_details[i][1] + "_" + tel_details[i][2]
-        del tel_details[i][1:3]
-        #print(tel_details[i])
-        x_array[i] = tel_details[i][3]
-        y_array[i] = tel_details[i][4]
-
-
-        pix_col=PixelDetection(current_event[i])
-
-
-        plt.plot(x_array[i], y_array[i], 'h', color=pix_col, markersize=8)
+        pix_color.append(PixelDetection(current_event[i]))
+        #print(pix_color[i])
+        #plt.plot(x_coords[i], y_coords[i], 'h', color=pix_color, markersize=8, linestyle="None")
         #plt.text(x_array[i], y_array[i], i)   # Adds pixel number to plot
 
 
-
-
-
+    plt.scatter(x_coords, y_coords, s=64, c=pix_color, marker='h')
     # Finishing the Plot for the telescope
-    plt.title("PMPIX")
-    plt.xlabel("x")
-    plt.ylabel("y")
-    plt.savefig('output/output_plot_event_{0}.pdf'.format(index + 1), bbox_inches='tight')
+    ax.set_title("PMPIX of event {}".format(index + 1))
+    plt.draw()
+    fig.savefig('output/output_plot_event_{0}.pdf'.format(index + 1), bbox_inches='tight')
 
 
 
+
+
+
+fig, ax = plt.subplots()
+#image, = ax.plot(x_coords, y_coords, markersize=8, linestyle="None")
+ax.set_xlabel("x")
+ax.set_ylabel("y")
+"""
+pix_color = []
+for i in range(TEL_PIXEL_COUNT):
+    pix_color.append(PixelDetection(events_array[i][i]))
+
+plt.scatter(x_coords, y_coords, s=8, c=pix_color, marker='h')
+"""
 
 for count, element in enumerate(events_array):
-    TelescopePlot(element, count)
     print(count)
-    print(element)
-    exit()
+    TelescopePlot(element, count)
+    #exit()
