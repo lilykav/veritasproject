@@ -115,10 +115,13 @@ for count, element in enumerate(pmt_array):
     pmt_peak_freq[count] = np.bincount(element).argmax()
 #pmt_peak_freq = pmt_peak_freq.astype(int)
 pmt_peak_freq = pmt_peak_freq.astype(int)
-print(pmt_peak_freq)
+#print(pmt_peak_freq)
 
 
 np.save('data/events_array.npy', events_array)
 np.save('data/pmt_array.npy', pmt_array)
 np.save('data/pmt_peak_freq.npy', pmt_peak_freq)
 
+
+
+print(pmt_array[128])
